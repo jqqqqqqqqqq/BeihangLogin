@@ -12,7 +12,7 @@ option=$1
 logout()
 {
     echo "Logging out..."
-    result=$(curl -s -k -A "$useragent" -d "action=logout&username=${username}&password=${password}&ajax=1" "https://gw.buaa.edu.cn/include/auth_action.php")
+    result=$(curl -s -k -A "$useragent" -d "action=logout&username=${username}&password=${password}" "https://gw.buaa.edu.cn:803/cgi-bin/srun_portal")
     if [[ $result =~ "logout" ]]; then
         echo "Success"
     else
