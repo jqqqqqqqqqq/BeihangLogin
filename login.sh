@@ -12,7 +12,7 @@ option=$1
 logout()
 {
     echo "Logging out..."
-    result=$(curl -s -k -A "$useragent" -d "action=logout&username=${username}&password=${password}" "https://gw.buaa.edu.cn:803/cgi-bin/srun_portal")
+    result=$(curl -s -k -A "$useragent" -d "action=logout&username=${username}&password=${password}&ajax=1" "https://gw.buaa.edu.cn/include/auth_action.php")
     if [[ $result =~ "logout" ]]; then
         echo "Success"
     else
@@ -43,6 +43,11 @@ login()
 		    sleep 3
 	    fi
     done
+}
+
+get_info()  # TODO
+{
+    result=$(curl -s -k -A "$useragent" -d "action=get_online_info&key=45343" "https://gw.buaa.edu.cn/include/auth_action.php")
 }
 
 main()
