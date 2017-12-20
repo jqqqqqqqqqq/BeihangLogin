@@ -1,29 +1,30 @@
 """
 This is a simple script for students in BUAA to check their remaining network traffic (in bytes).
 Usage: python buaa_traffic.py [username]
-Your username is your ID number.
+Your uid can be found using Chrome Developer Tools, etc., when you try to log in 'gw.buaa.edu.cn'.
 """
 import sys
 import requests
 import json
 
-UNFORMATTED_URL = "https://gw.buaa.edu.cn:803/beihang.php?route=getPackage&username={0}&pid=6"
-USERNAME = sys.argv[1]
+UNFORMATTED_URL = "https://gw.buaa.edu.cn:803/beihang.php?route=getPackage&uid={0}&pid=1"
+UID = sys.argv[1]
 
 
-def check_by_username(username):
+def check_by_uid(uid):
     """
     uid: str
     """
-    url = UNFORMATTED_URL.format(username)
+    url = UNFORMATTED_URL.format(uid)
     res = requests.get(url)
     return res.json()
 
 
 def main():
-    json_dict = check_by_username(USERNAME)
-    remain_bytes = json_dict["product_remain_bytes"]
-    res = "{:,}".format(remain_bytes)
+    json_dict = check_by_uid(UID)
+    remain_bytes = json_dict["acount_remain_bytes"]
+    all_bytes = json_dict["acount_all_bytes"]
+    res = "{0}/{1}".format(remain_bytes, all_bytes)
     print(res)
 
 
