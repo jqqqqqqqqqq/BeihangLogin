@@ -1,6 +1,6 @@
 """
 This is a simple script for students in BUAA to check their remaining network traffic (in bytes).
-Usage: python buaa_traffic.py [username]
+Usage: python buaa_traffic.py [uid]
 Your uid can be found using Chrome Developer Tools, etc., when you try to log in 'gw.buaa.edu.cn'.
 """
 import sys
