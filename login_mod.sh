@@ -6,7 +6,7 @@ retry=5
 
 #### DO NOT EDIT THIS LINE BELOW ####
 
-attemps=0
+attempts=0
 option=$1
 
 logout()
@@ -28,10 +28,10 @@ urlencode()
 
 login()
 {
-    while [ $attemps -lt $retry ]
+    while [ $attempts -lt $retry ]
     do
-	    attemps=`expr $attemps + 1`
-	    echo "Sending login request... Attemp "$attemps
+	    attempts=`expr $attempts + 1`
+	    echo "Sending login request... Attempt "$attempts
 	    result=$(curl -s -k -A "$useragent" -d "action=login&username=${username}&password={B}$(urlencode `echo -n $password|base64`)&ac_id=22&user_ip=&nas_ip=&user_mac=&save_me=1&ajax=1" "https://10.200.21.4:803/beihanglogin.php?ac_id=22&amp;url=https://10.200.21.4:803/beihangview.php")
 	    if [[ $result =~ "login_ok" ]]; then
 		    echo "Login success! Your internet connection has been activated."
