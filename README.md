@@ -4,12 +4,14 @@
 
 北航网络认证 CURL 客户端（雾）
 
+2019-09-28 更新：由于新版网络认证上线，旧版脚本已无法使用，是时候更换`login-v2.sh`了 :-D
+
 ## Usage:
 
 ### 登录：
 
- ```./login.sh login ```
+ ```bash login-v2.sh login ```
 
 ### 注销：
 
- ```./login.sh logout ```
+ ```bash login-v2.sh logout ```
