@@ -260,7 +260,7 @@ RESULT=`curl -k -s -c cookies.txt \
 -H 'Sec-Fetch-Site: none' \
 -H 'Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6' \
 -H 'Cookie: pgv_pvi=2381688832; AD_VALUE=8751256e; cookie=0; lang=zh-CN; user=$USERNAME' \
---compressed 'https://gw.buaa.edu.cn/index_1.html?ad_check=1'`
+'https://gw.buaa.edu.cn/index_1.html?ad_check=1'`
 
 #echo $RESULT
 AC_ID=${RESULT#*ac_id=}
@@ -278,7 +278,7 @@ RESULT=`curl -k -s -b cookies.txt \
 -H "Sec-Fetch-Site: same-origin" \
 -H "Referer: https://gw.buaa.edu.cn/srun_portal_pc?ac_id=$AC_ID&theme=buaa&url=www.buaa.edu.cn" \
 -H "Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6" \
---compressed "https://gw.buaa.edu.cn/cgi-bin/get_challenge?callback=jQuery112407419864172676014_1566720734115&username="$USERNAME"&ip="$IPADDR"&_="$TIMESTAMP`
+"https://gw.buaa.edu.cn/cgi-bin/get_challenge?callback=jQuery112407419864172676014_1566720734115&username="$USERNAME"&ip="$IPADDR"&_="$TIMESTAMP`
 
 # A dirty way to obtain information in JSON string.
 CHALLENGE=`echo $RESULT | cut -d '"' -f4`
