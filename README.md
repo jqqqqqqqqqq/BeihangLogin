@@ -15,3 +15,8 @@
 ### 注销：
 
  ```bash login-v2.sh logout ```
+
+### Python 版
+
+隔壁BIT用的是一个版本srun
+https://github.com/RogerYong/bit_srun
