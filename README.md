@@ -6,15 +6,22 @@
 
 2019-08-28 更新：由于新版网络认证上线，旧版脚本已无法使用，是时候更换`login-v2.sh`了 :-D
 
+## 检测并自动登录
+
+两个 try-connect 脚本可以检测当前是否已登录，如果没有登录就自动登录。
+
+* `try-connect.sh` 通过 ping 百度来检测登录状态
+* `try-connect-v2.sh` 通过访问网关 API 来检测登录状态
+
 ## Usage:
 
 ### 登录：
 
- ```bash login-v2.sh login ```
+ ```./login-v2.sh login ```
 
 ### 注销：
 
- ```bash login-v2.sh logout ```
+ ```./login-v2.sh logout ```
 
 -------
 ### Python 版
