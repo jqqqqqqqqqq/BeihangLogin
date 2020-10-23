@@ -17,11 +17,11 @@
 
 ### 登录：
 
- ```bash login-v2.sh login ```
+ ```./login-v2.sh login ```
 
 ### 注销：
 
- ```bash login-v2.sh logout ```
+ ```./login-v2.sh logout ```
 
 -------
 ### Python 版
