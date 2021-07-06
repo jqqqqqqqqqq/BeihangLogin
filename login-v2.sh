@@ -26,7 +26,7 @@ TIMESTAMP=`date +%s%3N`
 function str2ascii()
 {
 	s=$1
-	if [ "$s" == "\"" ]; then
+	if [ "$s" == '\"' ]; then
 		ascii="34"
 	else
 		ascii=`printf "%d" "'$s"`
