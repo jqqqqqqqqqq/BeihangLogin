@@ -250,6 +250,7 @@ fi
 # Get cookies and ac_id
 # Cookies will save as $COOKIEFILE in the working directory.
 RESULT=`curl -k -s -c $COOKIEFILE \
+--noproxy '*' \
 -H 'Host: gw.buaa.edu.cn' \
 -H 'Upgrade-Insecure-Requests: 1' \
 -H 'User-Agent: $UA' \
@@ -270,6 +271,7 @@ echo "AC_ID: "$AC_ID
 
 # Get challenge number
 RESULT=`curl -k -s -b $COOKIEFILE \
+--noproxy '*' \
 -H "Host: gw.buaa.edu.cn" \
 -H "Accept: text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01" \
 -H "DNT: 1" \
@@ -316,6 +318,7 @@ if [[ "$option" == "login" ]]; then
 
 	# Submit data and login
 	curl -k -b $COOKIEFILE \
+        --noproxy '*' \
 	-H "Host: gw.buaa.edu.cn" \
 	-H "Accept: text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01" \
 	-H "DNT: 1" \
@@ -329,6 +332,7 @@ if [[ "$option" == "login" ]]; then
 
 elif [[ "$option" == "logout" ]]; then
 	curl -k -b $COOKIEFILE \
+        --noproxy '*' \
 	-H "Host: gw.buaa.edu.cn" \
 	-H "Accept: text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01" \
 	-H "DNT: 1" \
