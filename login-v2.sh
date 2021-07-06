@@ -4,8 +4,8 @@
 #####################
 # Login Information #
 #####################
-USERNAME="你的学号"
-PASSWORD="你的密码"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+source $SCRIPT_DIR/account
 
 #################
 # Customization #
@@ -13,6 +13,7 @@ PASSWORD="你的密码"
 # If you need to modify SYSNAME, please use a url-encoded string
 SYSNAME="Mac+OS"
 UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+COOKIEFILE=`mktemp`
 
 #################################
 # Utility Functions & Variables #
@@ -25,7 +26,7 @@ TIMESTAMP=`date +%s%3N`
 function str2ascii()
 {
 	s=$1
-	if [ "$s" == "\"" ]; then
+	if [ "$s" == '\"' ]; then
 		ascii="34"
 	else
 		ascii=`printf "%d" "'$s"`
@@ -247,8 +248,9 @@ if [[ "$option" == "" ]]; then
 fi
 
 # Get cookies and ac_id
-# Cookies will save as cookies.txt in the working directory.
-RESULT=`curl -k -s -c cookies.txt \
+# Cookies will save as $COOKIEFILE in the working directory.
+RESULT=`curl -k -s -c $COOKIEFILE \
+--noproxy '*' \
 -H 'Host: gw.buaa.edu.cn' \
 -H 'Upgrade-Insecure-Requests: 1' \
 -H 'User-Agent: $UA' \
@@ -268,7 +270,8 @@ AC_ID=${AC_ID%&amp*}
 echo "AC_ID: "$AC_ID
 
 # Get challenge number
-RESULT=`curl -k -s -b cookies.txt \
+RESULT=`curl -k -s -b $COOKIEFILE \
+--noproxy '*' \
 -H "Host: gw.buaa.edu.cn" \
 -H "Accept: text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01" \
 -H "DNT: 1" \
@@ -314,7 +317,8 @@ if [[ "$option" == "login" ]]; then
 	#echo "URL Info: "$URL_INFO
 
 	# Submit data and login
-	curl -k -b cookies.txt \
+	curl -k -b $COOKIEFILE \
+        --noproxy '*' \
 	-H "Host: gw.buaa.edu.cn" \
 	-H "Accept: text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01" \
 	-H "DNT: 1" \
@@ -327,7 +331,8 @@ if [[ "$option" == "login" ]]; then
 	"https://gw.buaa.edu.cn/cgi-bin/srun_portal?callback=jQuery112407419864172676014_1566720734115&action=login&username="$USERNAME"&password=%7BMD5%7D"$PWD"&ac_id=$AC_ID&ip="$CLIENTIP"&chksum="$CHKSUM"&info=%7BSRBX1%7D"$URL_INFO"&n=200&type=1&os="$SYSNAME"&name=Macintosh&double_stack=0&_="$TIMESTAMP
 
 elif [[ "$option" == "logout" ]]; then
-	curl -k -b cookies.txt \
+	curl -k -b $COOKIEFILE \
+        --noproxy '*' \
 	-H "Host: gw.buaa.edu.cn" \
 	-H "Accept: text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01" \
 	-H "DNT: 1" \
@@ -339,3 +344,5 @@ elif [[ "$option" == "logout" ]]; then
 	-H "Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6" \
 	"https://gw.buaa.edu.cn/cgi-bin/srun_portal?callback=jQuery112407419864172676014_1566720734115&action=logout&username="$USERNAME"&ac_id=$AC_ID&ip="$CLIENTIP
 fi
+
+rm $COOKIEFILE
